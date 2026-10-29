@@ -24,7 +24,7 @@ $package = Join-Path $stage 'nwn2-patchwork'
 & cmake --install $build --config $Configuration --prefix $package
 if ($LASTEXITCODE -ne 0) { throw 'CMake install failed.' }
 $expected = @('nwn2-patchwork.exe','nwn2-patchwork.dll','nwn2-patchwork.ini',
-    'README.md','LICENSE','CHANGELOG.md','docs/compatibility.md','docs/configuration.md',
+    'README.md','LICENSE','CHANGELOG.md','CONTRIBUTING.md','docs/compatibility.md','docs/configuration.md',
     'docs/development.md','docs/troubleshooting.md','docs/validation.md','docs/release-notes.md')
 # Include small, committed release validation records if present.
 $records = Join-Path $root 'docs/releases'

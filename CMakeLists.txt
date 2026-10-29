@@ -40,5 +40,5 @@ add_executable(reset_fault_d3d9_test EXCLUDE_FROM_ALL tests/reset_fault_d3d9_tes
 target_include_directories(reset_fault_d3d9_test PRIVATE src)
 target_link_libraries(reset_fault_d3d9_test PRIVATE d3d9 user32)
 install(TARGETS patchwork_runtime patchwork_launcher RUNTIME DESTINATION . LIBRARY DESTINATION .)
-install(FILES config/nwn2-patchwork.ini README.md LICENSE CHANGELOG.md DESTINATION .)
+install(FILES config/nwn2-patchwork.ini README.md LICENSE CHANGELOG.md CONTRIBUTING.md DESTINATION .)
 install(DIRECTORY docs/ DESTINATION docs PATTERN research-origin.json EXCLUDE)
