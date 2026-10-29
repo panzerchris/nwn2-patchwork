@@ -29,3 +29,15 @@ blocked binary must not be published. See the repository's validation records.
 
 Built by Windows CI. Both-build acceptance of the exact package is recorded
 separately from the historical display research and automated test results.
+
+The exact 176,748-byte CI ZIP passed normal startup, loaded native width resizing,
+title movement and maximize/restore checks on both supported EXEs. V2 additionally
+passed Graphics resolution Apply and loaded native fullscreen entry/return. All
+17 offline tests passed. The exact DLL's local Defender scan found no threats,
+and neither gameplay session produced a new detection/quarantine event. These
+observations are not a guarantee of future antivirus verdicts.
+
+See [0.2.0 validation](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/releases/v0.2.0-validation.md)
+for precise scope, preservation checks and uncertainties, including the original
+game's unexplained nonzero exit status after Alt+F4. The ZIP is the original CI
+artifact; this acceptance record was added after that artifact was built.

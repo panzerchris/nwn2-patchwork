@@ -27,3 +27,9 @@ local/microsoft-submission.json. Do not submit a duplicate or ask again.
 User subsequently authorized pursuing a conventional drop-in production loader;
 retain the research probes/launcher for diagnostics. Prove safe initialization
 timing and both-build runtime behavior before replacing the public package.
+
+The v0.2.0 drop-in CI artifact has completed bounded both-build acceptance; see
+docs/releases/v0.2.0-validation.md. Preserve that exact ZIP/DLL; documentation
+updates after the tag do not change the tested binary. Do not restart broad
+research permutations without a concrete defect. The old launcher review is
+still pending and no universal antivirus-clearance claim is warranted.
