@@ -13,6 +13,11 @@ These labels identify the tested builds; a matching version string is insufficie
 This does not claim vendor authenticity for every file in an installation.
 Other store releases, modified executables and Enhanced Edition are not supported.
 
+The unreleased [multiplayer login candidate](multiplayer.md) uses these same two
+hashes. Its exact CI DLL passes bounded login/general regression checks; successful
+server joining, server-password rejection and isolated offline behavior remain
+unaccepted. The feature stays disabled unless explicitly enabled.
+
 For a check without starting the game, compare this result with the table:
 
 ```powershell

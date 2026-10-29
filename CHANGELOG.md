@@ -10,8 +10,10 @@
   expected instruction context. Server connections and new-account requests use
   separate paths. See [candidate evidence and remaining checks](docs/multiplayer.md).
 
-This candidate has not completed release acceptance. Successful server joining,
-server-password rejection, isolated offline and exact CI-binary checks are pending.
+The exact branch CI DLL passes bounded login/gameplay checks on both supported
+builds and a v2 controlled unreachable-server timeout. Release acceptance remains
+open for successful joining, server-password rejection and isolated offline login;
+see the candidate evidence for exact artifact hashes and other limits.
 
 ## 0.2.0 — drop-in loading
 
