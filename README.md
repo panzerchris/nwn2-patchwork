@@ -2,6 +2,11 @@
 
 A small collection of configurable runtime fixes for Neverwinter Nights 2.
 
+**Release status:** the source and Windows CI are available. The first binary
+candidate is being held as a draft after Microsoft Defender quarantined its
+launcher during testing. Review is pending and the original-build check of that
+new binary is incomplete. See [candidate validation](docs/releases/v0.1.0-validation.md).
+
 The first release focuses on display recovery: moving and resizing the window,
 maximize/restore, minimize/restore, resolution changes and Alt+Enter. Individual
 fixes can be enabled or disabled in an INI file. Audio, the defunct connection
@@ -9,7 +14,8 @@ check and DirectX timing are possible future work; this release does not change 
 
 ## Download and run
 
-Download the **Windows x86 ZIP** from [Releases](https://github.com/panzerchris/nwn2-patchwork/releases).
+Once a binary release is published, download the **Windows x86 ZIP** from
+[Releases](https://github.com/panzerchris/nwn2-patchwork/releases).
 The automatically generated GitHub “Source code” archives contain source, not a runnable build.
 
 1. Close NWN2. Extract the ZIP into your **NWN2 Complete game folder**. Keep its

@@ -21,5 +21,9 @@ freezes or broken input should be reported. Snap/mixed-DPI and arbitrary mod
 combinations remain unvalidated; small-window HUD scaling remains native.
 See the repository's compatibility, configuration and validation documents.
 
-This release starts as a draft pending smoke checks of these exact packaged
-binaries on both supported game builds. Automated tests do not replace gameplay checks.
+**Publication held:** Microsoft Defender quarantined the launcher during the v2
+runtime check, reporting `Behavior:Win32/DefenseEvasion.A!ml`. The v2 load/move/
+resize/maximize/restore checks worked, but the original-build counterpart could
+not start after quarantine. No Microsoft review determination is available yet.
+Keep this release in draft. Do not present it as cleared or ready to use.
+See [candidate validation](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/releases/v0.1.0-validation.md).

@@ -34,7 +34,10 @@ has contents-write permission only on the tagged release job.
 3. Wait for CI; download the draft release's exact ZIP and verify SHA-256.
 4. Smoke-test those binaries on both supported EXEs. Record commit/hash/actions,
    correct image/input, normal exit and any limits in a validation record.
-5. Add the validation record and release notes, then publish the draft prerelease.
+5. Resolve any antivirus detection rather than publishing a known blocked build.
+   Request a vendor review with the exact binary/source hashes; do not work around
+   quarantine or ask users to weaken security settings.
+6. Add the validation record and release notes, then publish the draft prerelease.
 
 A green CI run alone is insufficient for a real-game compatibility claim. Wider
 user testing can turn a prerelease into a stable release later. Do not build from

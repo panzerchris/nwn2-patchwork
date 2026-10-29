@@ -18,3 +18,6 @@ Do not archive the old remote or change EPOS as part of routine release work.
 
 Create releases as drafts until the actual packaged DLL/launcher have passed a
 bounded smoke check on both supported builds. Document limitations honestly.
+The v0.1.0 candidate is held: Defender quarantined the launcher after the v2
+smoke check; original check is incomplete. Read docs/releases/v0.1.0-validation.md.
+Do not restore/repack/rename to bypass quarantine or change Defender settings.
