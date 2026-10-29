@@ -2,6 +2,7 @@
 // initializes once on the game's ordinary DirectInput8Create call.
 #include "runtime_support.h"
 #include "supported_builds.h"
+#include "multiplayer.h"
 #include <unknwn.h>
 #include <intrin.h>
 #include <atomic>
@@ -67,15 +68,21 @@ static BOOL CALLBACK initializePatchwork(PINIT_ONCE,PVOID argument,PVOID*) {
                 L"d3d9.dll",L"dsound.dll",L"ddraw.dll",L"winmm.dll",L"version.dll"})
             if(patchwork::fs::exists(home/name))
                 throw std::runtime_error("Another runtime patch/proxy is present. See Patchwork's compatibility documentation.");
+        if(config.skipLegacyLoginCheck && reinterpret_cast<uintptr_t>(GetModuleHandleW(nullptr))!=0x400000)
+            throw std::runtime_error("Unexpected multiplayer image base.");
+        if(config.skipLegacyLoginCheck)
+            multiplayer::validate(hash,reinterpret_cast<const void*>(0x400000+multiplayer::contextRva));
         const auto runtime=patchwork::createRuntimeConfig(config);
         std::ofstream receipt(runtime.parent_path()/L"bootstrap.json",std::ios::binary);
         receipt<<"{\"method\":\"DirectInput8Create\",\"caller\":\"0x"<<std::hex
             <<reinterpret_cast<uintptr_t>(argument)<<"\",\"pid\":"<<std::dec<<GetCurrentProcessId()
-            <<",\"thread\":"<<GetCurrentThreadId()<<",\"exe_sha256\":\""<<hash<<"\"}\n";
+            <<",\"thread\":"<<GetCurrentThreadId()<<",\"exe_sha256\":\""<<hash
+            <<"\",\"skip_legacy_login_check\":"<<(config.skipLegacyLoginCheck?"true":"false")<<"}\n";
         receipt.close();
         if(!receipt)throw std::runtime_error("Cannot write the bootstrap receipt.");
         const DWORD result=Initialize(const_cast<wchar_t*>(runtime.c_str()));
         if(result!=1)throw std::runtime_error("Patchwork initialization refused, code "+std::to_string(result));
+        if(config.skipLegacyLoginCheck)multiplayer::install(hash);
         initialized.store(true,std::memory_order_release);
     } catch(const std::exception& error) {
         // Initialization can have installed some hooks before a write failure.

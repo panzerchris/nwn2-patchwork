@@ -25,7 +25,8 @@ $package = $stage
 if ($LASTEXITCODE -ne 0) { throw 'CMake install failed.' }
 $expected = @('nwn2-patchwork.ini',
     'README.md','LICENSE','CHANGELOG.md','CONTRIBUTING.md','docs/compatibility.md','docs/configuration.md',
-    'docs/development.md','docs/troubleshooting.md','docs/validation.md','docs/release-notes.md','docs/loading.md')
+    'docs/development.md','docs/troubleshooting.md','docs/validation.md','docs/release-notes.md','docs/loading.md',
+    'docs/multiplayer.md')
 # Include small, committed release validation records if present.
 $records = Join-Path $root 'docs/releases'
 if (Test-Path -LiteralPath $records) {

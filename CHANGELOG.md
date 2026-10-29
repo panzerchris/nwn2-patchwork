@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — multiplayer login candidate
+
+- Add opt-in `[Multiplayer] SkipLegacyLoginCheck=1` to take the native
+  authentication-unavailable path before starting the obsolete ordinary-login
+  request. The native warning and OK acknowledgement remain.
+- Preserve existing configurations: the option defaults off when absent.
+- Guard the five-byte change with both supported executable hashes and the full
+  expected instruction context. Server connections and new-account requests use
+  separate paths. See [candidate evidence and remaining checks](docs/multiplayer.md).
+
+This candidate has not completed release acceptance. Successful server joining,
+server-password rejection, isolated offline and exact CI-binary checks are pending.
+
 ## 0.2.0 — drop-in loading
 
 - Replace the distributed launcher with a self-contained `dinput8.dll` forwarding

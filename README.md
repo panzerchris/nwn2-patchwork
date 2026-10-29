@@ -13,6 +13,11 @@ maximize/restore, minimize/restore, resolution changes and Alt+Enter. Individual
 fixes can be enabled or disabled in an INI file. Audio, the defunct connection
 check and DirectX timing are possible future work; this release does not change them.
 
+The current source branch also contains an unreleased, opt-in
+[multiplayer login candidate](docs/multiplayer.md). It is disabled by default and
+has outstanding connection and release acceptance checks; 0.2.0 binaries do not
+include it.
+
 ## Download and run
 
 Once a binary release is published, download the **Windows x86 ZIP** from
