@@ -1,0 +1,31 @@
+{
+  "research_checkpoint": "1908353",
+  "runtime_source_commit": "e7b02cb",
+  "note": "Independent successor repository. These source/test files were copied byte-for-byte from the research checkpoint. Runtime acceptance D193-D198 used the native-window default. New release builds require their own smoke test.",
+  "files_sha256": {
+    "src/apply_geometry.h": "88b3f0e475d8a2e86fcc3948544e63938186653724ed680a6f5a9d3ccd6b1843",
+    "tests/apply_geometry_test.cpp": "6f45ed3ed6614d61b469aa0029ef799b2f1e558f252434ef5e01a867b3f095ea",
+    "tests/borderless_leave_guard_test.cpp": "0a0ae57b0df45225c606da6112336f0925778695b721f42305124bff0233c6a7",
+    "src/caption_geometry.h": "579d85651acff3e577af9d57111291a70579b6945a528c89c33ed4fe3cc159a5",
+    "tests/caption_geometry_test.cpp": "5915f93cb6ce68c2055e24d1d33e0a9b3f993fa220f23bd52a5930388eece7fa",
+    "tests/empty_restore_test.cpp": "c9c6bc39a32752b586536c00c51ca8fceeb1b8fc36a0a40bac522f93af5dfb31",
+    "src/finishing_key.h": "542f90625c7797f14f1137538460698c63c21de3fe1cc64a12c20d9510d63b24",
+    "tests/finishing_key_test.cpp": "f6b2cde19e240ec2bffc9ce7de80f1d0b3b8c8eaa6894a49aeb7ea113c8696c0",
+    "tests/graphics_controls_test.cpp": "24879626adc529f3b72a3a106f11fe29eb556c8da619bebeaa76234b8bf726bd",
+    "tests/initializer_refusal_test.cpp": "6a2328596eea88e31117851ae5d46d2666cb755581209efc63c186dfc9d5be30",
+    "tests/input_acquisition_trace_test.cpp": "a15d4cbc175e1f17be84bd99c833dc49c5bce64933aad455bc862eb95c8ca39b",
+    "tests/mode_operation_test.cpp": "03b214bc08c45a9298454fb3ee719afe52ba84b3c58f44de914324148754b993",
+    "tests/operation_interruption_test.cpp": "810aba462d79880b651629fab6316a93a10a8d2fe01b8e7020f6c1d3da1d5acb",
+    "src/presentation_style.h": "451c6676d6cd7dcdf185a475738ec064dacbc1093c9138d36a39ebf218c3b9e0",
+    "tests/presentation_style_test.cpp": "1871e8717391640a0d30bc5197a5029211dc05643c6a7de1418099a863c64ba6",
+    "src/probe.cpp": "8efb9410cddfe74dfbba71aaa74b1d794cc0fefc45055925f94426aa5cda2c51",
+    "tests/pump_bound_test.cpp": "26016589152207f8c654af51a994e59f2485cfb2f1804d6f77c85c42bd95d526",
+    "src/reset_fault.h": "94939b22da2e513691f5d5f85dcc9e2e0e00144664d65a8a94965025e7a7aa85",
+    "tests/reset_fault_d3d9_test.cpp": "9a1c6ee3a636c23b41917a810ec50f6e35ddd6c6b9cc1dd781fcc9a0ca9f20ae",
+    "src/resize_geometry.h": "2a7e59cfc503a075c97311de4eef5a1462dd697aa7f136fe1fcf6fc706d09963",
+    "tests/resize_geometry_test.cpp": "3d86c57d265a562aa26a15a726718bb91944c46d3ea90a99a6085136f97760f2",
+    "tests/resolution_sync_test.cpp": "e44396cebeadd2895a4310128fd4b8794c0ba92fc10d6c6669fcf3adee6590e6",
+    "src/ui_geometry.h": "bc0132d37f7126af525855025bebf812e07e223b549a556ec9fc254203abd4be",
+    "tests/ui_geometry_test.cpp": "bc7e1fe34f4a71b423dcd1ab06da39e9c64e93b175fe942d24cdbba640a142cc"
+  }
+}

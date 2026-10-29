@@ -1,0 +1,12 @@
+/build*/
+/dist/
+/.vs/
+/local/
+*.user
+*.suo
+*.obj
+*.pdb
+*.ilk
+*.dll
+*.exe
+__pycache__/

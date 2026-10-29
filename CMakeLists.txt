@@ -1,0 +1,44 @@
+cmake_minimum_required(VERSION 3.24)
+project(nwn2_patchwork VERSION 0.1.0 LANGUAGES CXX)
+if(NOT WIN32 OR NOT MSVC OR NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
+  message(FATAL_ERROR "NWN2 Patchwork requires MSVC Win32: cmake -S . -B build -A Win32")
+endif()
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+add_compile_options(/W4 /WX)
+add_library(patchwork_runtime SHARED src/probe.cpp)
+set_target_properties(patchwork_runtime PROPERTIES OUTPUT_NAME nwn2-patchwork)
+target_link_libraries(patchwork_runtime PRIVATE bcrypt user32)
+add_executable(patchwork_launcher src/launcher.cpp)
+set_target_properties(patchwork_launcher PROPERTIES OUTPUT_NAME nwn2-patchwork)
+target_compile_definitions(patchwork_launcher PRIVATE PATCHWORK_VERSION="${PROJECT_VERSION}")
+target_link_libraries(patchwork_launcher PRIVATE bcrypt user32 shell32 ole32)
+include(CTest)
+if(BUILD_TESTING)
+  foreach(name caption_geometry operation_interruption mode_operation empty_restore
+               graphics_controls apply_geometry resolution_sync pump_bound
+               input_acquisition_trace borderless_leave_guard presentation_style
+               finishing_key resize_geometry ui_geometry config)
+    add_executable(${name}_test tests/${name}_test.cpp)
+    target_include_directories(${name}_test PRIVATE src)
+    target_link_libraries(${name}_test PRIVATE bcrypt user32)
+    add_test(NAME ${name} COMMAND ${name}_test)
+  endforeach()
+  add_executable(initializer_refusal_test tests/initializer_refusal_test.cpp)
+  target_link_options(initializer_refusal_test PRIVATE /DYNAMICBASE:NO /FIXED /BASE:0x400000)
+  add_test(NAME initializer_refusal COMMAND initializer_refusal_test $<TARGET_FILE:patchwork_runtime>)
+  add_test(NAME launcher_help COMMAND patchwork_launcher --help)
+  add_test(NAME launcher_refusals COMMAND powershell -NoProfile -File
+           ${CMAKE_CURRENT_SOURCE_DIR}/tests/launcher_refusal_test.ps1
+           -Launcher $<TARGET_FILE:patchwork_launcher>
+           -Fixture $<TARGET_FILE:initializer_refusal_test>
+           -Config ${CMAKE_CURRENT_SOURCE_DIR}/config/nwn2-patchwork.ini)
+endif()
+# Explicit hardware calibration, excluded from the normal build/test/package.
+add_executable(reset_fault_d3d9_test EXCLUDE_FROM_ALL tests/reset_fault_d3d9_test.cpp)
+target_include_directories(reset_fault_d3d9_test PRIVATE src)
+target_link_libraries(reset_fault_d3d9_test PRIVATE d3d9 user32)
+install(TARGETS patchwork_runtime patchwork_launcher RUNTIME DESTINATION . LIBRARY DESTINATION .)
+install(FILES config/nwn2-patchwork.ini README.md LICENSE CHANGELOG.md DESTINATION .)
+install(DIRECTORY docs/ DESTINATION docs PATTERN research-origin.json EXCLUDE)
