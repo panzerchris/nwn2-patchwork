@@ -7,7 +7,9 @@ static void check(bool condition){if(!condition)std::abort();}
 template<class Fn> static void refuses(Fn fn) {
     bool rejected=false;try{fn();}catch(const std::exception&){rejected=true;}check(rejected);
 }
-int main() {
+int main(int argc,char** argv) {
+    check(argc==2);
+    check(DisplayConfig::read(std::filesystem::path(argv[1]).wstring()).skipLegacyLoginCheck);
     wchar_t temp[MAX_PATH]{},file[MAX_PATH]{};
     check(GetTempPathW(MAX_PATH,temp)>0);
     check(GetTempFileNameW(temp,L"npw",0,file)!=0);

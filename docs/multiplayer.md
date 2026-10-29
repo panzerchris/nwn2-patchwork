@@ -1,11 +1,13 @@
 # Multiplayer login check
 
-The unreleased source candidate adds an opt-in bypass for the obsolete BioWare
-Community Login request. The exact CI DLL passes bounded login and general
-regression checks on both supported builds. Real server joining and password
-rejection remain untested; this is not full multiplayer compatibility acceptance.
+Version 0.3.0 adds a bypass for the obsolete BioWare Community Login request,
+enabled in the supplied INI. The branch CI DLL passes bounded login and general
+regression checks on both supported builds, plus actual local server joining,
+password rejection and LAN gameplay on v2. Versioned release artifact checks are
+recorded separately; this is bounded prerelease coverage, not universal multiplayer
+compatibility acceptance.
 
-While the game is closed, add:
+The supplied 0.3.0 INI contains:
 
 ```ini
 [Multiplayer]
@@ -14,7 +16,8 @@ SkipLegacyLoginCheck=1
 
 An absent section or `0` retains the native check. Existing display-only INIs
 therefore keep their current behavior. The existing `[Display]` section remains
-required.
+required. Edit with the game closed. Removing the option also retains the native
+check; it is the supplied INI that enables the feature by default.
 
 With the option enabled, ordinary Sign In takes the game's authentication
 unavailable path before starting its auth request. The native service-down
@@ -71,9 +74,9 @@ explicit test opt-in.
 - ZIP SHA-256: `6dbe43280aa04bbfad50a30ffb6cc2599d1a980933b60f878e27bd5db3a7265a`.
 - DLL SHA-256: `fc34facce8a26838c7046b9ba8eca0434a66d63ad8fb215526d48b65836507d1`.
 
-This branch artifact retains project version 0.2.0. It is an unreleased candidate,
-distinct from the published 0.2.0 ZIP/DLL; no candidate tag or release was created.
-These results apply to the hashes above, not a future rebuilt package.
+This earlier branch artifact retains project version 0.2.0 and is distinct from
+the published 0.2.0 ZIP/DLL. Its results apply to the hashes above, not a future
+rebuilt package. The 0.3.0 versioned artifact needs its own bounded smoke record.
 
 | Exact CI DLL check | Observation |
 | --- | --- |
@@ -118,12 +121,28 @@ The owned sessions exit normally through Alt+F4; preserved settings restore
 byte-for-byte and all 12,424 save files audit unchanged. Canonical v2 is restored
 after the original comparisons.
 
-## Remaining acceptance gates
+## Local server coverage and remaining limits
 
-Successful joining, actual server-password rejection, hostname connection and
-LAN/hosting with another player remain untested. No authorized server or second
-machine is available. The controlled unreachable-endpoint check above covers v2
-only. Source-level separation and menu access do not establish a successful join.
+The user authorized a dedicated server plus client on this PC for the connection
+test. The exact branch CI DLL on v2 rejects a wrong dummy password with the native
+“Password incorrect” result. The correct password reaches character selection,
+loads the installed Tutorial and accepts movement input. The dedicated server
+shows the connected dummy player. A normal disconnect, another fast login and
+LAN browser discovery/password/rejoin also reach gameplay with working movement.
+The server uses a separate private home, public listing is off, and autosave is
+off. No public server or second client is used. After normal exits, all preserved
+settings and saves restore/audit unchanged; the ten pre-existing character files
+also remain unchanged.
+
+The wildcard-bound fixture is discovered through its advertised local interface
+address; `127.0.0.2` instead times out during discovery and does not exercise its
+password check. The cause of that alias behavior was not established.
+
+Actual original-build server joining, hostname connection, a second player,
+integrated client hosting and wider network/mod combinations remain untested.
+The controlled unreachable-endpoint and actual server/password/LAN checks above
+cover v2 only. Original's both-build smoke establishes login/menu and bounded
+general behavior, not an actual original-build server join.
 
 Isolated offline login remains untested: the test shell lacks elevation for a
 per-process firewall denial. No shared adapter, global DNS/hosts or security
@@ -134,6 +153,6 @@ request to cancel or deliver a late completion. Repeated login/back and delayed
 interaction checks pass as identified above; manually cancelling a pending native
 auth request and an injected completion-race experiment were not performed.
 
-Keep the feature opt-in and the PR in draft while these gates remain open. A
-future versioned release needs its own exact packaged-artifact acceptance; do not
-promote the current evidence into a full multiplayer compatibility claim.
+The user chose to release 0.3.0 with the supplied switch enabled and these limits
+documented. Preserve the distinction between branch evidence, exact versioned
+package smoke and wider untested multiplayer compatibility.

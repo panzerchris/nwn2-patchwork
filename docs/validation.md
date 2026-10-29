@@ -4,9 +4,9 @@ The drop-in 0.2.0 CI package has completed the bounded both-build acceptance che
 See [exact artifact validation](releases/v0.2.0-validation.md) for checksums,
 observations and limits. The older 0.1.0 launcher remains held for vendor review.
 
-The unreleased opt-in [multiplayer candidate](multiplayer.md) has a separate
-artifact record and remaining connection gates. Its branch CI DLL must not be
-confused with the published 0.2.0 package.
+The 0.3.0 [multiplayer login bypass](multiplayer.md) has separate branch evidence,
+versioned package smoke and remaining coverage limits. The earlier branch CI DLL
+must not be confused with the published 0.2.0 package.
 
 ## Research foundation
 

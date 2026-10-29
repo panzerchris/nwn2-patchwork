@@ -13,10 +13,10 @@ These labels identify the tested builds; a matching version string is insufficie
 This does not claim vendor authenticity for every file in an installation.
 Other store releases, modified executables and Enhanced Edition are not supported.
 
-The unreleased [multiplayer login candidate](multiplayer.md) uses these same two
-hashes. Its exact CI DLL passes bounded login/general regression checks; successful
-server joining, server-password rejection and isolated offline behavior remain
-unaccepted. The feature stays disabled unless explicitly enabled.
+The [multiplayer login bypass](multiplayer.md) uses these same two hashes and is
+enabled in the supplied 0.3.0 INI. Bounded both-build login/general checks and v2
+local-server/password/LAN checks have evidence. Original actual server joining,
+isolated offline and wider network/mod combinations remain untested.
 
 For a check without starting the game, compare this result with the table:
 

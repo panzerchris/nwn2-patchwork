@@ -39,14 +39,14 @@ Screen unchecked**, then press Alt+Enter. Press it again to restore the window.
 The Graphics checkbox still requests exclusive mode. Borderless renders at desktop
 resolution; it does not upscale a lower-resolution render target and may cost more GPU time.
 
-## Multiplayer candidate
+## Multiplayer login
 
-The unreleased source candidate also accepts `[Multiplayer]` with the optional
-`SkipLegacyLoginCheck=0` switch (default off). Set it to `1` to skip the obsolete
-ordinary-login request through the native unavailable path. The warning still
-requires OK. An absent section preserves the native check; `[Display]` remains
-required. See [multiplayer candidate evidence and limits](multiplayer.md) before
-enabling it. Published 0.2.0 binaries do not accept this section.
+Version 0.3.0 supplies `[Multiplayer] SkipLegacyLoginCheck=1` in its INI. This
+skips the obsolete ordinary-login request through the native unavailable path;
+the warning still requires OK. Set `0` to retain the native check. For compatibility,
+an older INI without this section or option also retains the native check;
+`[Display]` remains required. See [multiplayer evidence and limits](multiplayer.md).
+Published 0.2.0 binaries do not accept this section.
 
 ## Internal runtime configuration
 

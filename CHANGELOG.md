@@ -1,19 +1,21 @@
 # Changelog
 
-## Unreleased — multiplayer login candidate
+## 0.3.0 — multiplayer login
 
-- Add opt-in `[Multiplayer] SkipLegacyLoginCheck=1` to take the native
+- Supply `[Multiplayer] SkipLegacyLoginCheck=1` to take the native
   authentication-unavailable path before starting the obsolete ordinary-login
   request. The native warning and OK acknowledgement remain.
-- Preserve existing configurations: the option defaults off when absent.
+- Enable it in the shipped INI; `0` or an absent section/option preserves the
+  native check for existing configurations.
 - Guard the five-byte change with both supported executable hashes and the full
   expected instruction context. Server connections and new-account requests use
-  separate paths. See [candidate evidence and remaining checks](docs/multiplayer.md).
+  separate paths. See [evidence and limits](docs/multiplayer.md).
 
-The exact branch CI DLL passes bounded login/gameplay checks on both supported
-builds and a v2 controlled unreachable-server timeout. Release acceptance remains
-open for successful joining, server-password rejection and isolated offline login;
-see the candidate evidence for exact artifact hashes and other limits.
+The branch CI DLL passes bounded login/gameplay checks on both supported builds.
+V2 additionally passes actual local-server joining, password rejection, LAN rejoin
+and gameplay, plus a controlled unreachable timeout. Isolated offline login,
+original-build actual joining and wider network/mod combinations remain untested.
+Versioned package identity and its bounded smoke checks are recorded separately.
 
 ## 0.2.0 — drop-in loading
 
