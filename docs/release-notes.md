@@ -23,8 +23,9 @@ Temporary native dragging pauses are expected; image/input should recover after
 release. Snap/mixed-DPI, long sessions and arbitrary mod combinations remain
 unvalidated. The native small-window HUD scaling limit remains.
 
-The previous launcher's Microsoft review is pending. This DLL uses a different
-loading architecture; it is not represented as antivirus-certified. A known
+Microsoft closed the previous launcher's case without reproducing the detection;
+that superseded launcher remains held. This DLL uses a different loading
+architecture; it is not represented as antivirus-certified. A known
 blocked binary must not be published. See the repository's validation records.
 
 Built by Windows CI. Both-build acceptance of the exact package is recorded

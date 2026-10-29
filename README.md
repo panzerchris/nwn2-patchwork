@@ -5,7 +5,8 @@ A small collection of configurable runtime fixes for Neverwinter Nights 2.
 Version 0.2.0 uses a drop-in DirectInput DLL. Available builds are listed under
 [Releases](https://github.com/panzerchris/nwn2-patchwork/releases); see
 [validation](docs/validation.md) for the tested scope. The older 0.1.0 launcher
-remains held for Microsoft review.
+remains held; Microsoft closed its review after being unable to reproduce the
+detection. See the [case record](docs/releases/v0.1.0-validation.md).
 
 The first release focuses on display recovery: moving and resizing the window,
 maximize/restore, minimize/restore, resolution changes and Alt+Enter. Individual

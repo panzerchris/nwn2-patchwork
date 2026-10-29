@@ -36,7 +36,8 @@ See [loading architecture](loading.md).
 For diagnostic work only, configure a separate build directory with
 `-DPATCHWORK_BUILD_DIAGNOSTIC_LAUNCHER=ON`. This retains the old own-child
 debugger/injection path and its tests. It is not installed or shipped. The 0.1.0
-launcher has a pending Defender review; do not restore quarantined copies.
+launcher's Defender case was closed without a reproduced detection; its original
+behavior detection remains unresolved. Do not restore quarantined copies.
 
 The default workflow builds/tests/packages on pushes and pull requests. Tagged
 versions also create a **draft prerelease** with the ZIP and its checksum. This

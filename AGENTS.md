@@ -21,9 +21,10 @@ bounded smoke check on both supported builds. Document limitations honestly.
 The v0.1.0 candidate is held: Defender quarantined the launcher after the v2
 smoke check; original check is incomplete. Read docs/releases/v0.1.0-validation.md.
 Do not restore/repack/rename to bypass quarantine or change Defender settings.
-The user approved Microsoft review and completed sign-in/human verification;
-submission is confirmed, determination pending. Private receipt is in
-local/microsoft-submission.json. Do not submit a duplicate or ask again.
+Microsoft has completed the old-launcher case without reproducing a detection;
+cloud/client show no malware, while the file-level determination still says
+Pending. This is not an explicit correction of the original behavior detection.
+Private receipt is in local/microsoft-submission.json. Do not submit a duplicate.
 User subsequently authorized pursuing a conventional drop-in production loader;
 retain the research probes/launcher for diagnostics. Prove safe initialization
 timing and both-build runtime behavior before replacing the public package.
@@ -31,5 +32,11 @@ timing and both-build runtime behavior before replacing the public package.
 The v0.2.0 drop-in CI artifact has completed bounded both-build acceptance; see
 docs/releases/v0.2.0-validation.md. Preserve that exact ZIP/DLL; documentation
 updates after the tag do not change the tested binary. Do not restart broad
-research permutations without a concrete defect. The old launcher review is
-still pending and no universal antivirus-clearance claim is warranted.
+research permutations without a concrete defect. The old launcher remains held;
+no universal antivirus-clearance claim is warranted.
+
+For a fresh local chat doing reverse engineering/probing, the independent research
+checkout's START-HERE.md maps the source, inspectors, preserved probes and optional
+Ghidra MCP. On this machine it is D:/workspace/nwn2-research; game files are in
+G:/GoG Galaxy/Games/NWN2 Complete. The release build has no dependency on that repo.
+For ordinary release work use this repo's docs/development.md and docs/loading.md.
