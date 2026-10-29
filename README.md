@@ -83,5 +83,7 @@ research data and build intermediates are excluded. See [development](docs/devel
 
 ## Licence
 
+Bug reports and focused fixes are welcome; see [contributing](CONTRIBUTING.md).
+
 [MIT](LICENSE). An unofficial community project; no game executable or game assets
 are distributed. Neverwinter Nights and associated names belong to their respective owners.
