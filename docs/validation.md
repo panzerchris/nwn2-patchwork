@@ -23,15 +23,18 @@ This identifies the historical tested DLL, not a promise of byte-identical new b
 
 Both D197/D198 closed normally. The three user settings files were restored by
 hash and each full audit found all 12,424 save files unchanged. This is research
-preservation evidence; the public launcher lets game preferences save normally.
+preservation evidence; the public DLL lets game preferences save normally.
 
 ## Automated tests
 
 CTest covers the carried-forward geometry, actual wrapper/operation fixtures,
 capture/cancellation/mode ordering, resolution synchronization, Graphics guards,
 borderless guard logic and actual DLL refusal of an unsupported executable.
-New launcher/configuration tests cover public option validation and translation,
-exact supported hashes, command-line refusal and unsupported-file preflight.
+Configuration tests cover public option validation and translation. The actual
+drop-in DLL is tested in a non-game host against Windows' real DirectInput: six
+named exports and ordinals, proxy-first load order, invalid/valid/repeated creation,
+HRESULT/interface/last-error behavior, and joystick format forwarding. No device
+is acquired and no registry export is called. Diagnostic launcher tests are opt-in.
 Tests run without copyrighted game files. Hardware D3D calibration is excluded.
 
 These tests cannot prove correct gameplay rendering. A release ZIP also needs a
@@ -46,5 +49,5 @@ modal pauses are accepted. Snap layouts, mixed-DPI transitions, every cross-moni
 combination, long-session reliability and arbitrary mod combinations are not certified.
 Lower-resolution exclusive focus loss to EPOS is not fixed; borderless is an opt-in
 workaround. The stock small-window HUD distortion remains. Failed/experimental
-small-UI redesign and custom dragging are disabled by the public launcher.
+small-UI redesign and custom dragging are disabled by the public configuration.
 No audio, connection-check or DirectX timing fix is included.

@@ -2,11 +2,13 @@
 
 `src/probe.cpp` and its geometry headers preserve the tested runtime implementation.
 The legacy filename/internal export/schema remain to keep source provenance clear;
-the public binary is named `nwn2-patchwork.dll`. Avoid cosmetic runtime rewrites
-while establishing release parity. Runtime fixes are separate from launcher policy.
+the public binary is named `dinput8.dll`. Avoid cosmetic runtime rewrites
+while establishing release parity. Runtime fixes are separate from loading policy.
 
-- `src/launcher.cpp`: public paths/configuration/build checks and startup.
-- `src/inject_child.h`: the tested own-child entry-point injection machinery.
+- `src/dropin.cpp` / `.def`: DirectInput forwarding and one-time initialization.
+- `src/runtime_support.h`: executable hashing and local startup records.
+- `src/launcher.cpp` / `src/inject_child.h`: retained diagnostic launcher,
+  excluded from the default build and every release package.
 - `src/config.h`: public [Display] options mapped to the inherited runtime schema.
 - `src/supported_builds.h`: public preflight allowlist; runtime independently verifies it.
 - `tests/`: offline fixtures; no game installation is needed for CTest.
@@ -23,6 +25,18 @@ Use the README commands or open the generated Visual Studio solution. Use Win32,
 not x64: hooks include x86 assembly and verified fixed-address ABI assumptions.
 The CRT is statically linked. Debug and release builds are distinct.
 Never distribute a modified game EXE or game assets.
+
+The release DLL does no initialization in `DllMain`. It initializes on the
+game's first `DirectInput8Create`, after the normal Windows import-loading phase.
+Both supported builds must demonstrate that this happens early enough for the
+display hooks. The real library is loaded by a full system path to prevent
+self-recursion. Calls in other executables forward without applying fixes.
+See [loading architecture](loading.md).
+
+For diagnostic work only, configure a separate build directory with
+`-DPATCHWORK_BUILD_DIAGNOSTIC_LAUNCHER=ON`. This retains the old own-child
+debugger/injection path and its tests. It is not installed or shipped. The 0.1.0
+launcher has a pending Defender review; do not restore quarantined copies.
 
 The default workflow builds/tests/packages on pushes and pull requests. Tagged
 versions also create a **draft prerelease** with the ZIP and its checksum. This

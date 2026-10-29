@@ -41,8 +41,8 @@ resolution; it does not upscale a lower-resolution render target and may cost mo
 
 ## Internal runtime configuration
 
-The launcher translates these public settings into a small per-launch configuration
+The DLL translates these public settings into a small per-launch configuration
 beside its startup log in Local AppData. The inherited DLL uses an internal
 `[Experiment]` section and `Initialize` export; these are implementation details.
 Custom modeless dragging, trace/fault injection and the rejected small-UI redesign
-remain disabled by the public launcher. No audio options are implemented yet.
+remain disabled by the public configuration. No audio options are implemented yet.

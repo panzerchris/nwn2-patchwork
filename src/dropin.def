@@ -1,0 +1,8 @@
+LIBRARY dinput8
+EXPORTS
+    DirectInput8Create=_PatchworkDirectInput8Create@20 @1
+    DllCanUnloadNow=_PatchworkDllCanUnloadNow@0 PRIVATE
+    DllGetClassObject=_PatchworkDllGetClassObject@12 PRIVATE
+    DllRegisterServer=_PatchworkDllRegisterServer@0 PRIVATE
+    DllUnregisterServer=_PatchworkDllUnregisterServer@0 PRIVATE
+    GetdfDIJoystick=_PatchworkGetdfDIJoystick@0 @6

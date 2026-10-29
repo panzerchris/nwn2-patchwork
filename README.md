@@ -2,10 +2,10 @@
 
 A small collection of configurable runtime fixes for Neverwinter Nights 2.
 
-**Release status:** the source and Windows CI are available. The first binary
-candidate is being held as a draft after Microsoft Defender quarantined its
-launcher during testing. Review is pending and the original-build check of that
-new binary is incomplete. See [candidate validation](docs/releases/v0.1.0-validation.md).
+Version 0.2.0 uses a drop-in DirectInput DLL. Available builds are listed under
+[Releases](https://github.com/panzerchris/nwn2-patchwork/releases); see
+[validation](docs/validation.md) for the tested scope. The older 0.1.0 launcher
+remains held for Microsoft review.
 
 The first release focuses on display recovery: moving and resizing the window,
 maximize/restore, minimize/restore, resolution changes and Alt+Enter. Individual
@@ -18,27 +18,30 @@ Once a binary release is published, download the **Windows x86 ZIP** from
 [Releases](https://github.com/panzerchris/nwn2-patchwork/releases).
 The automatically generated GitHub “Source code” archives contain source, not a runnable build.
 
-1. Close NWN2. Extract the ZIP into your **NWN2 Complete game folder**. Keep its
-   `nwn2-patchwork` subfolder intact, next to `nwn2main.exe`.
-2. Open that subfolder and run **`nwn2-patchwork.exe`**. You can make a shortcut to it.
-3. The default settings enable the tested display fixes. Edit
-   `nwn2-patchwork.ini` with the game closed to change them.
+1. Close NWN2. If your game folder already contains `dinput8.dll`, stop and check
+   [compatibility](docs/compatibility.md); do not overwrite another mod's loader.
+2. Extract the ZIP into your **NWN2 Complete game folder**. It places `dinput8.dll`
+   next to `nwn2main.exe`, plus the `nwn2-patchwork` configuration/documentation folder.
+3. Start the game normally, including through your existing GOG shortcut. Edit
+   `nwn2-patchwork/nwn2-patchwork.ini` with the game closed to configure the fixes.
 
 No compiler, Python, PowerShell wrapper or additional Visual C++ runtime install
 is needed. The game remains 32-bit; the x86 package is also correct on 64-bit Windows.
-Patchwork starts its own game process and applies changes in memory before game
-entry. It does not replace or modify `nwn2main.exe`, change saves, or install a proxy DLL.
+The game loads the local DirectInput forwarding DLL, which initializes Patchwork
+on its first DirectInput call and forwards to Windows' original implementation.
+There is no separate launcher, debugger or remote-process injection in this package.
+Changes are applied in memory; `nwn2main.exe` and saves are not modified on disk.
 Game preferences continue to save normally, as with an ordinary game launch.
 
-To play without Patchwork, use the game's normal launcher or `nwn2main.exe`.
-To uninstall, close the game and remove only the `nwn2-patchwork` subfolder.
+To disable or uninstall Patchwork, close the game and remove its `dinput8.dll`
+from the game folder. You can also remove the `nwn2-patchwork` subfolder.
 Small startup logs are stored in `%LOCALAPPDATA%\NWN2 Patchwork\logs`.
 
 ## Supported games
 
 **GOG Neverwinter Nights 2 Complete 1.23 and GOG 1.23 v2**, using the exact
 `nwn2main.exe` hashes in [compatibility](docs/compatibility.md). Other executables
-are refused before Patchwork starts the game. Version labels alone do not establish compatibility.
+are refused during startup before any fix is applied. Version labels alone do not establish compatibility.
 This package is for the original game, not Neverwinter Nights 2: Enhanced Edition.
 
 Development/runtime checks were performed on Windows 11. The automated build uses

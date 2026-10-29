@@ -17,7 +17,7 @@ guards and evidence that the calling convention, ownership and failure behavior
 remain correct. Runtime tests need separate image and input observations; an
 S_OK result alone is insufficient. See [development](docs/development.md).
 
-Keep launcher policy separate from runtime fixes. Add future fix families as
+Keep loading/configuration policy separate from runtime fixes. Add future fix families as
 separate modules and INI sections when proved. Keep commits and changes scoped;
 do not mix cosmetic rewrites of the tested runtime with functional changes.
 
