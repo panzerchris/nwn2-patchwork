@@ -1,5 +1,9 @@
 # Validation and limits
 
+Version 0.3.0 adds the multiplayer login bypass. See its
+[artifact verification and runtime evidence](releases/v0.3.0-validation.md) for
+checksums, tested scope and limits.
+
 The drop-in 0.2.0 CI package has completed the bounded both-build acceptance check.
 See [exact artifact validation](releases/v0.2.0-validation.md) for checksums,
 observations and limits. The older 0.1.0 launcher remains held for vendor review.

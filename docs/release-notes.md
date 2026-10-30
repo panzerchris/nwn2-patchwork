@@ -20,11 +20,11 @@ five bytes in memory. It does not restore the public browser or authentication
 service. Actual game-server connections, passwords and timeouts have separate
 native paths.
 
-The branch CI DLL passes bounded login/gameplay checks on both builds. V2 also
-passes actual local dedicated-server joining, wrong-password rejection, LAN
-rejoin and movement input. All 18 offline tests pass, including actual installer
-write/refusal/protection fixtures. The versioned CI package has a separate bounded
-smoke record linked from [validation](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/validation.md).
+Validation includes all 18 automated tests, login/gameplay checks on both supported
+builds, and local dedicated-server joining, wrong-password rejection, LAN rejoin
+and movement input on v2. The release ZIP includes a SHA-256 checksum and a build
+manifest. Detailed artifact identities, runtime evidence and scope are linked from
+[validation](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/validation.md).
 
 This is a prerelease with documented limits: isolated offline login, actual
 original-build server joining, hostname connections, multiple players and wider

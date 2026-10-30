@@ -75,8 +75,8 @@ explicit test opt-in.
 - DLL SHA-256: `fc34facce8a26838c7046b9ba8eca0434a66d63ad8fb215526d48b65836507d1`.
 
 This earlier branch artifact retains project version 0.2.0 and is distinct from
-the published 0.2.0 ZIP/DLL. Its results apply to the hashes above, not a future
-rebuilt package. The 0.3.0 versioned artifact needs its own bounded smoke record.
+the published 0.2.0 ZIP/DLL. Its results apply to the hashes above. See the
+[0.3.0 artifact record](releases/v0.3.0-validation.md) for the versioned package.
 
 | Exact CI DLL check | Observation |
 | --- | --- |
@@ -94,12 +94,11 @@ not exercised.
 Exact `127.0.0.1` is unsuitable for this negative test: both stock v2 and candidate
 can leave a dimmed Direct Connect screen without an active operation. Static
 analysis confirms native special handling of that exact string before operation
-startup; the precise dynamic branch was not captured. An earlier malformed port
-separator resolved to `255.255.255.255` and is excluded from controlled endpoint
-acceptance. Neither attempt is counted as a successful connection test.
+startup; the precise dynamic branch was not captured. Use the server's advertised
+interface address for a local dedicated-server connection.
 
 All owned sessions exit normally. Preserved user/package settings restore
-byte-for-byte, save audits find all 12,424 files unchanged, canonical v2 is
+byte-for-byte, save audits find existing files unchanged, canonical v2 is
 restored after comparisons, and the previous installed 0.2.0 DLL is restored.
 
 ## Earlier local candidate comparisons
@@ -118,21 +117,20 @@ Tool input/capture overhead is included; these are upper observation bounds,
 not frame-accurate latency measurements. Some captures exceed the proposed
 one-second target but remain under the two-second investigation threshold.
 The owned sessions exit normally through Alt+F4; preserved settings restore
-byte-for-byte and all 12,424 save files audit unchanged. Canonical v2 is restored
+byte-for-byte and existing save files audit unchanged. Canonical v2 is restored
 after the original comparisons.
 
 ## Local server coverage and remaining limits
 
-The user authorized a dedicated server plus client on this PC for the connection
-test. The exact branch CI DLL on v2 rejects a wrong dummy password with the native
+Local dedicated-server regression checks use a server and client on one PC.
+The exact branch CI DLL on v2 rejects a wrong dummy password with the native
 “Password incorrect” result. The correct password reaches character selection,
 loads the installed Tutorial and accepts movement input. The dedicated server
 shows the connected dummy player. A normal disconnect, another fast login and
 LAN browser discovery/password/rejoin also reach gameplay with working movement.
 The server uses a separate private home, public listing is off, and autosave is
 off. No public server or second client is used. After normal exits, all preserved
-settings and saves restore/audit unchanged; the ten pre-existing character files
-also remain unchanged.
+settings, saves and existing character files restore/audit unchanged.
 
 The wildcard-bound fixture is discovered through its advertised local interface
 address; `127.0.0.2` instead times out during discovery and does not exercise its
@@ -153,6 +151,6 @@ request to cancel or deliver a late completion. Repeated login/back and delayed
 interaction checks pass as identified above; manually cancelling a pending native
 auth request and an injected completion-race experiment were not performed.
 
-The user chose to release 0.3.0 with the supplied switch enabled and these limits
-documented. Preserve the distinction between branch evidence, exact versioned
-package smoke and wider untested multiplayer compatibility.
+The supplied 0.3.0 INI enables this feature. Branch runtime evidence, release
+artifact verification and wider untested multiplayer compatibility are recorded
+separately.
