@@ -4,6 +4,10 @@ The drop-in 0.2.0 CI package has completed the bounded both-build acceptance che
 See [exact artifact validation](releases/v0.2.0-validation.md) for checksums,
 observations and limits. The older 0.1.0 launcher remains held for vendor review.
 
+The 0.3.0 [multiplayer login bypass](multiplayer.md) has separate branch evidence,
+versioned package smoke and remaining coverage limits. The earlier branch CI DLL
+must not be confused with the published 0.2.0 package.
+
 ## Research foundation
 
 The runtime implementation was carried over from an independent display-research
@@ -54,4 +58,5 @@ combination, long-session reliability and arbitrary mod combinations are not cer
 Lower-resolution exclusive focus loss to EPOS is not fixed; borderless is an opt-in
 workaround. The stock small-window HUD distortion remains. Failed/experimental
 small-UI redesign and custom dragging are disabled by the public configuration.
-No audio, connection-check or DirectX timing fix is included.
+The published 0.2.0 package includes no audio, connection-check or DirectX timing
+fix. Current branch candidate evidence is limited to the linked multiplayer record.

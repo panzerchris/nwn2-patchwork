@@ -7,6 +7,7 @@
 #include <cwchar>
 
 struct DisplayConfig {
+    bool skipLegacyLoginCheck=false;
     std::map<std::wstring, unsigned> values{
         {L"RevertV2",1}, {L"GuardEmptyRestore",1}, {L"NativeSizing",1},
         {L"SyncWindowedMode",1}, {L"PreservePlacement",1},
@@ -30,8 +31,13 @@ struct DisplayConfig {
         wchar_t sections[4096]{};
         const DWORD size=GetPrivateProfileSectionNamesW(sections,4096,path.c_str());
         if(size==0 || size>=4094)throw std::runtime_error("Configuration must contain a [Display] section.");
-        for(const wchar_t* section=sections;*section;section+=wcslen(section)+1)
-            if(_wcsicmp(section,L"Display"))throw std::runtime_error("Unknown configuration section; expected [Display].");
+        bool displayFound=false;
+        for(const wchar_t* section=sections;*section;section+=wcslen(section)+1) {
+            if(!_wcsicmp(section,L"Display"))displayFound=true;
+            if(_wcsicmp(section,L"Display") && _wcsicmp(section,L"Multiplayer"))
+                throw std::runtime_error("Unknown configuration section; expected [Display] or [Multiplayer].");
+        }
+        if(!displayFound)throw std::runtime_error("Configuration must contain a [Display] section.");
         wchar_t entries[16384]{};
         if(GetPrivateProfileSectionW(L"Display",entries,16384,path.c_str())>=16382)
             throw std::runtime_error("Display configuration is too large.");
@@ -53,6 +59,20 @@ struct DisplayConfig {
             const bool dimension=found->first==L"MinClientWidth" || found->first==L"MinClientHeight";
             if(!dimension && number>1)throw std::runtime_error("Display switches must be 0 or 1.");
             found->second=number;
+        }
+        wchar_t multiplayer[4096]{};
+        if(GetPrivateProfileSectionW(L"Multiplayer",multiplayer,4096,path.c_str())>=4094)
+            throw std::runtime_error("Multiplayer configuration is too large.");
+        bool multiplayerSeen=false;
+        for(const wchar_t* entry=multiplayer;*entry;entry+=wcslen(entry)+1) {
+            const wchar_t* equals=wcschr(entry,L'=');
+            if(!equals || _wcsicmp(std::wstring(entry,equals).c_str(),L"SkipLegacyLoginCheck"))
+                throw std::runtime_error("Unknown multiplayer option; expected SkipLegacyLoginCheck.");
+            if(multiplayerSeen)throw std::runtime_error("Duplicate multiplayer option.");
+            multiplayerSeen=true;
+            if(wcscmp(equals+1,L"0") && wcscmp(equals+1,L"1"))
+                throw std::runtime_error("SkipLegacyLoginCheck must be 0 or 1.");
+            config.skipLegacyLoginCheck=equals[1]==L'1';
         }
         config.validate();return config;
     }

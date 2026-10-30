@@ -1,44 +1,34 @@
-# NWN2 Patchwork 0.2.0
+# NWN2 Patchwork 0.3.0
 
-A small collection of configurable runtime fixes for Neverwinter Nights 2.
+Multiplayer Sign In now skips the obsolete authentication request through the
+game's native service-unavailable path. Acknowledge the existing warning to reach
+the multiplayer menu immediately. The supplied INI enables this with
+`[Multiplayer] SkipLegacyLoginCheck=1`; set `0` to retain the native wait. Existing
+display-only INIs keep the native check until the option is added.
 
-Display recovery fixes for moving/resizing, maximize/restore, minimize/restore,
-resolution Apply and Alt+Enter, plus an optional borderless workaround for EPOS
-Connect's fullscreen focus interaction. Audio, connection-check and DirectX timing
-changes are future work.
+Uses the same drop-in **dinput8.dll** as 0.2.0. No separate launcher, debugger or
+on-disk game EXE patch is needed. The existing display fixes remain unchanged.
+Download **nwn2-patchwork-0.3.0-windows-x86.zip**. Close NWN2, verify any existing
+`dinput8.dll` belongs to Patchwork, then extract the DLL and `nwn2-patchwork` folder
+beside `nwn2main.exe`. Use the x86 package on 64-bit Windows too. Keep your custom
+display settings when upgrading and add the new multiplayer section if retaining
+an older INI. Do not overwrite another mod's loader.
 
-Download **nwn2-patchwork-0.2.0-windows-x86.zip**. With NWN2 closed, extract
-`dinput8.dll` and the `nwn2-patchwork` folder beside `nwn2main.exe`, then start
-the game normally. Do not overwrite another mod's `dinput8.dll`. Use this x86
-package on 64-bit Windows too. Edit `nwn2-patchwork/nwn2-patchwork.ini` to configure
-the fixes. Remove Patchwork's `dinput8.dll` to disable it.
+Supports only the exact documented GOG 1.23 and GOG 1.23 v2 executable hashes.
+The login patch checks the build and full instruction context before changing
+five bytes in memory. It does not restore the public browser or authentication
+service. Actual game-server connections, passwords and timeouts have separate
+native paths.
 
-The forwarding DLL replaces the separate launcher used in the unpublished 0.1.0
-candidate. It initializes inside the normally starting game, outside `DllMain`,
-then forwards DirectInput to Windows. No game EXE or assets are included or
-modified on disk. The diagnostic launcher remains available in source only.
+The branch CI DLL passes bounded login/gameplay checks on both builds. V2 also
+passes actual local dedicated-server joining, wrong-password rejection, LAN
+rejoin and movement input. All 18 offline tests pass, including actual installer
+write/refusal/protection fixtures. The versioned CI package has a separate bounded
+smoke record linked from [validation](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/validation.md).
 
-Supports only the documented **GOG 1.23 / GOG 1.23 v2** executable hashes.
-Temporary native dragging pauses are expected; image/input should recover after
-release. Snap/mixed-DPI, long sessions and arbitrary mod combinations remain
-unvalidated. The native small-window HUD scaling limit remains.
-
-Microsoft closed the previous launcher's case without reproducing the detection;
-that superseded launcher remains held. This DLL uses a different loading
-architecture; it is not represented as antivirus-certified. A known
-blocked binary must not be published. See the repository's validation records.
-
-Built by Windows CI. Both-build acceptance of the exact package is recorded
-separately from the historical display research and automated test results.
-
-The exact 176,748-byte CI ZIP passed normal startup, loaded native width resizing,
-title movement and maximize/restore checks on both supported EXEs. V2 additionally
-passed Graphics resolution Apply and loaded native fullscreen entry/return. All
-17 offline tests passed. The exact DLL's local Defender scan found no threats,
-and neither gameplay session produced a new detection/quarantine event. These
-observations are not a guarantee of future antivirus verdicts.
-
-See [0.2.0 validation](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/releases/v0.2.0-validation.md)
-for precise scope, preservation checks and uncertainties, including the original
-game's unexplained nonzero exit status after Alt+F4. The ZIP is the original CI
-artifact; this acceptance record was added after that artifact was built.
+This is a prerelease with documented limits: isolated offline login, actual
+original-build server joining, hostname connections, multiple players and wider
+network/mod combinations remain untested. See [multiplayer evidence](https://github.com/panzerchris/nwn2-patchwork/blob/main/docs/multiplayer.md).
+No audio or DirectX timing changes are included. Native dragging can briefly
+pause rendering; image/input should recover after release. Existing display and
+antivirus limitations remain in the validation records.

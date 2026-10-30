@@ -5,7 +5,9 @@ docs/development.md. Target only the two hashes in docs/compatibility.md.
 Keep the source and build self-contained; no research submodule or game assets.
 
 The user chose MIT and the description in README. Initial scope is the proved
-display fixes. Audio, connection-check and DirectX timing fixes are future work.
+display fixes. Audio and DirectX timing fixes are future work. Version0.3.0 adds
+the requested ordinary multiplayer login bypass through the same drop-in loader;
+see docs/multiplayer.md for its bounded evidence and limits.
 Rendering may pause while dragging if image/input recover after release.
 Native dragging is the default; custom dragging and failed UI redesign stay off.
 

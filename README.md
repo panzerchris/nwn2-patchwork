@@ -2,7 +2,7 @@
 
 A small collection of configurable runtime fixes for Neverwinter Nights 2.
 
-Version 0.2.0 uses a drop-in DirectInput DLL. Available builds are listed under
+Version 0.3.0 uses a drop-in DirectInput DLL. Available builds are listed under
 [Releases](https://github.com/panzerchris/nwn2-patchwork/releases); see
 [validation](docs/validation.md) for the tested scope. The older 0.1.0 launcher
 remains held; Microsoft closed its review after being unable to reproduce the
@@ -10,8 +10,15 @@ detection. See the [case record](docs/releases/v0.1.0-validation.md).
 
 The first release focuses on display recovery: moving and resizing the window,
 maximize/restore, minimize/restore, resolution changes and Alt+Enter. Individual
-fixes can be enabled or disabled in an INI file. Audio, the defunct connection
-check and DirectX timing are possible future work; this release does not change them.
+fixes can be enabled or disabled in an INI file. Audio and DirectX timing remain
+future work.
+
+Version 0.3.0 adds the [multiplayer login bypass](docs/multiplayer.md), enabled in
+the supplied INI. Ordinary Sign In immediately takes the game's unavailable-service
+path; acknowledge the native warning to reach the multiplayer menu. Server
+passwords and game-server timeouts retain their native paths. Older display-only
+INIs retain the login wait until the new option is added. See the linked validation
+limits; this does not restore the public server browser.
 
 ## Download and run
 

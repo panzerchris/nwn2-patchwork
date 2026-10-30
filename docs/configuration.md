@@ -1,6 +1,6 @@
 # Configuration
 
-Edit `nwn2-patchwork.ini` while the game is closed. Options are under `[Display]`.
+Edit `nwn2-patchwork.ini` while the game is closed. Display options are under `[Display]`.
 Use `1` or `0`; use decimal integers for dimensions. Missing options use the
 defaults below. Unknown options, invalid values and invalid dependencies are refused.
 Comments belong on separate lines beginning with `;`.
@@ -38,6 +38,15 @@ To use the workaround, set `BorderlessAltEnter=1`, start with the game's **Full
 Screen unchecked**, then press Alt+Enter. Press it again to restore the window.
 The Graphics checkbox still requests exclusive mode. Borderless renders at desktop
 resolution; it does not upscale a lower-resolution render target and may cost more GPU time.
+
+## Multiplayer login
+
+Version 0.3.0 supplies `[Multiplayer] SkipLegacyLoginCheck=1` in its INI. This
+skips the obsolete ordinary-login request through the native unavailable path;
+the warning still requires OK. Set `0` to retain the native check. For compatibility,
+an older INI without this section or option also retains the native check;
+`[Display]` remains required. See [multiplayer evidence and limits](multiplayer.md).
+Published 0.2.0 binaries do not accept this section.
 
 ## Internal runtime configuration
 
