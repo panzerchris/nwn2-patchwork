@@ -1,44 +1,59 @@
 # NWN2 Patchwork working rules
 
-This is the independent public release repository. Read README.md and
-docs/development.md. Target only the two hashes in docs/compatibility.md.
-Keep the source and build self-contained; no research submodule or game assets.
+This is the independent public MIT release repository. Read README.md and
+docs/development.md. Keep source and builds self-contained; no research submodule,
+game assets or dependency on a private checkout.
 
-The user chose MIT and the description in README. Initial scope is the proved
-display fixes. Audio and DirectX timing fixes are future work. Version0.3.0 adds
-the requested ordinary multiplayer login bypass through the same drop-in loader;
-see docs/multiplayer.md for its bounded evidence and limits.
-Rendering may pause while dragging if image/input recover after release.
-Native dragging is the default; custom dragging and failed UI redesign stay off.
+## Documentation audience
 
-Preserve runtime source provenance. Changes need exact expected-byte/build checks
-and appropriate offline/runtime verification. Never treat CTest as gameplay proof.
-Do not run a second game or terminate an existing user's process. Runtime tests
-must preserve/restore the user's nwn2.ini, nwn2player.ini and ui/default/guisettings.ini
-after confirming the owned game has exited. Keep private logs/binaries under local/.
-Do not archive the old remote or change EPOS as part of routine release work.
+Patchwork is the human-friendly publication for players and contributors.
+Follow the documentation guidance in docs/development.md for every user guide
+and every published release version.
 
-Create releases as drafts until the actual packaged DLL has passed a
-bounded smoke check on both supported builds. Document limitations honestly.
-The v0.1.0 candidate is held: Defender quarantined the launcher after the v2
-smoke check; original check is incomplete. Read docs/releases/v0.1.0-validation.md.
-Do not restore/repack/rename to bypass quarantine or change Defender settings.
-Microsoft has completed the old-launcher case without reproducing a detection;
-cloud/client show no malware, while the file-level determination still says
-Pending. This is not an explicit correction of the original behavior detection.
-Private receipt is in local/microsoft-submission.json. Do not submit a duplicate.
-User subsequently authorized pursuing a conventional drop-in production loader;
-retain the research probes/launcher for diagnostics. Prove safe initialization
-timing and both-build runtime behavior before replacing the public package.
+Explain features, setup, configuration, supported builds, troubleshooting and
+useful limitations in plain language. Keep checksums and a concise testing
+summary. Put architecture and build requirements in developer documentation.
+Preserve detailed experiment chronology, intermediate artifacts, checkpoint IDs,
+tool failures, failed approaches and local preservation records in the independent
+nwn2-research repository. Do not publish personal decisions or workstation paths.
+Do not weaken evidence claims while simplifying prose.
 
-The v0.2.0 drop-in CI artifact has completed bounded both-build acceptance; see
-docs/releases/v0.2.0-validation.md. Preserve that exact ZIP/DLL; documentation
-updates after the tag do not change the tested binary. Do not restart broad
-research permutations without a concrete defect. The old launcher remains held;
-no universal antivirus-clearance claim is warranted.
+## Runtime boundaries
 
-For a fresh local chat doing reverse engineering/probing, the independent research
-checkout's START-HERE.md maps the source, inspectors, preserved probes and optional
-Ghidra MCP. On this machine it is D:/workspace/nwn2-research; game files are in
-G:/GoG Galaxy/Games/NWN2 Complete. The release build has no dependency on that repo.
-For ordinary release work use this repo's docs/development.md and docs/loading.md.
+Target only the two executable hashes in docs/compatibility.md. Shipped scope is
+display fixes and the multiplayer login bypass. Audio and DirectX timing remain
+future work; do not advertise them as shipped.
+
+The display core is frozen pending a concrete defect. Native dragging is the
+default; temporary rendering pauses are acceptable if picture and controls
+recover after release. Custom dragging and experimental HUD changes stay off.
+Preserve source provenance and avoid unrelated runtime rewrites.
+
+Changes need exact expected-byte/build checks, correct ABI and ownership, and
+appropriate automated and in-game verification. CTest is not gameplay proof.
+Do not run a second game or attach to or terminate an existing user's game.
+Preserve nwn2.ini, nwn2player.ini and ui/default/guisettings.ini byte-for-byte;
+restore only after the owned game exits. Preserve saves. Keep private files under
+ignored local/. Do not change unrelated software or legacy repositories.
+
+For detailed reverse engineering or test procedures, use the independent
+nwn2-research checkout's START-HERE.md and current STATUS. Resolve game paths
+through that workspace's configuration; do not infer them from a repository path.
+
+## Release preservation
+
+Create releases as drafts until the actual packaged DLL has passed a bounded
+smoke check on both supported builds. Document limitations honestly and keep
+candidate testing distinct from final-package testing.
+
+The 0.2.0 published DLL passed bounded checks on both builds. For 0.3.0, gameplay
+evidence comes from an earlier build with the same runtime source; the final
+package was verified but not retested in-game. These are historical coverage
+limits, not instructions to repeat tests. See docs/releases/ for concise records.
+
+Do not rebuild or replace published assets, or move tags, for documentation edits.
+The unpublished 0.1.0 launcher remains held after its behavior detection.
+Microsoft closed its review without reproducing the detection; this is not an
+explicit behavior-rule correction or universal antivirus clearance.
+Never restore, rename or repack quarantined binaries to bypass protection,
+change security settings, or submit duplicate reviews as routine release work.

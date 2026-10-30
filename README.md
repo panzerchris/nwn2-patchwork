@@ -2,99 +2,62 @@
 
 A small collection of configurable runtime fixes for Neverwinter Nights 2.
 
-Version 0.3.0 uses a drop-in DirectInput DLL. Available builds are listed under
-[Releases](https://github.com/panzerchris/nwn2-patchwork/releases); see
-[validation](docs/validation.md) for the tested scope. The older 0.1.0 launcher
-remains held; Microsoft closed its review after being unable to reproduce the
-detection. See the [case record](docs/releases/v0.1.0-validation.md).
+Patchwork helps the game recover when you move or resize its window, minimize
+or maximize it, change resolution, or switch fullscreen modes. It also offers
+optional borderless fullscreen and skips the long wait when signing into multiplayer.
 
-The first release focuses on display recovery: moving and resizing the window,
-maximize/restore, minimize/restore, resolution changes and Alt+Enter. Individual
-fixes can be enabled or disabled in an INI file. Audio and DirectX timing remain
-future work.
+**[Download 0.3.0](https://github.com/panzerchris/nwn2-patchwork/releases/tag/v0.3.0)**
+for GOG Neverwinter Nights 2 Complete 1.23 or 1.23 v2.
+Patchwork is currently a prerelease. It supports the original game, not Enhanced Edition.
 
-Version 0.3.0 adds the [multiplayer login bypass](docs/multiplayer.md), enabled in
-the supplied INI. Ordinary Sign In immediately takes the game's unavailable-service
-path; acknowledge the native warning to reach the multiplayer menu. Server
-passwords and game-server timeouts retain their native paths. Older display-only
-INIs retain the login wait until the new option is added. See the linked validation
-limits; this does not restore the public server browser.
+## Install
 
-## Download and run
+1. Close NWN2 and download the **Windows x86 ZIP** from
+   [Releases](https://github.com/panzerchris/nwn2-patchwork/releases).
+   Use x86 on 64-bit Windows too. The GitHub “Source code” downloads are for developers.
+2. Extract `dinput8.dll` and the `nwn2-patchwork` folder beside `nwn2main.exe`
+   in your game installation. If `dinput8.dll` is already there, check that it
+   belongs to Patchwork before replacing it; another mod may use that filename.
+3. Start the game through your usual shortcut.
 
-Once a binary release is published, download the **Windows x86 ZIP** from
-[Releases](https://github.com/panzerchris/nwn2-patchwork/releases).
-The automatically generated GitHub “Source code” archives contain source, not a runnable build.
+No separate launcher or additional runtime installation is needed. Patchwork
+applies its fixes in memory; it does not modify your game executable or save files.
 
-1. Close NWN2. If your game folder already contains `dinput8.dll`, stop and check
-   [compatibility](docs/compatibility.md); do not overwrite another mod's loader.
-2. Extract the ZIP into your **NWN2 Complete game folder**. It places `dinput8.dll`
-   next to `nwn2main.exe`, plus the `nwn2-patchwork` configuration/documentation folder.
-3. Start the game normally, including through your existing GOG shortcut. Edit
-   `nwn2-patchwork/nwn2-patchwork.ini` with the game closed to configure the fixes.
+**Upgrading:** back up your Patchwork INI before extracting an update if you have
+customized it. When upgrading from 0.2.0 and keeping your old INI, add the
+[multiplayer setting](docs/configuration.md#multiplayer-login) to enable the faster login.
 
-No compiler, Python, PowerShell wrapper or additional Visual C++ runtime install
-is needed. The game remains 32-bit; the x86 package is also correct on 64-bit Windows.
-The game loads the local DirectInput forwarding DLL, which initializes Patchwork
-on its first DirectInput call and forwards to Windows' original implementation.
-There is no separate launcher, debugger or remote-process injection in this package.
-Changes are applied in memory; `nwn2main.exe` and saves are not modified on disk.
-Game preferences continue to save normally, as with an ordinary game launch.
+**Uninstalling:** close the game and remove Patchwork's `dinput8.dll`. You can
+also remove the `nwn2-patchwork` folder.
 
-To disable or uninstall Patchwork, close the game and remove its `dinput8.dll`
-from the game folder. You can also remove the `nwn2-patchwork` subfolder.
-Small startup logs are stored in `%LOCALAPPDATA%\NWN2 Patchwork\logs`.
+## Settings and known issues
 
-## Supported games
+Edit `nwn2-patchwork/nwn2-patchwork.ini` with the game closed.
+The supplied settings enable the display fixes and faster multiplayer login.
 
-**GOG Neverwinter Nights 2 Complete 1.23 and GOG 1.23 v2**, using the exact
-`nwn2main.exe` hashes in [compatibility](docs/compatibility.md). Other executables
-are refused during startup before any fix is applied. Version labels alone do not establish compatibility.
-This package is for the original game, not Neverwinter Nights 2: Enhanced Edition.
+- **Borderless fullscreen:** enable `BorderlessAltEnter=1`, start windowed,
+  then press Alt+Enter. See [configuration](docs/configuration.md) for details.
+- **Multiplayer:** the service-unavailable warning still appears; click OK to
+  reach the multiplayer menu. Patchwork does not restore the public server browser.
+- **Dragging:** rendering may pause while you move or resize the window. The
+  picture and controls should recover when you release it.
+- **Small windows:** the original HUD can stretch below 1024 pixels wide or
+  768 pixels high.
+- **Compatibility:** only the two documented GOG executables are supported.
+  Other runtime patchers, including Client Extension and graphics/input wrappers,
+  are not currently supported alongside Patchwork.
 
-Development/runtime checks were performed on Windows 11. The automated build uses
-Windows Server 2022; other Windows versions have not been runtime-validated.
-Start from an installation without other runtime patchers, Client Extension or
-local graphics/input/audio proxy DLLs. Those combinations are not supported yet.
+See [compatibility](docs/compatibility.md), [configuration](docs/configuration.md)
+and [troubleshooting](docs/troubleshooting.md) for help.
+[Testing and checksums](docs/validation.md) describes the tested setups and remaining gaps.
 
-## Display behavior and limits
+## Contributing
 
-- A temporary rendering pause while dragging is normal for the native Windows
-  move/resize loop. Rendering and input should recover after release.
-- Moving, width resizing, maximize/restore, minimize/restore, resolution Apply and
-  native Alt+Enter recovery have research evidence on both supported EXEs.
-- EPOS Connect can take focus when exclusive fullscreen changes the monitor's
-  resolution. Optional `BorderlessAltEnter=1` avoids that change: start windowed,
-  then press Alt+Enter for desktop-sized borderless presentation. The Graphics
-  Full Screen checkbox continues to request native exclusive fullscreen.
-- Snap layouts, mixed-DPI transitions and long-session reliability are not fully
-  validated. The original HUD can stretch below 1024 wide or 768 high.
-
-See [configuration](docs/configuration.md), [troubleshooting](docs/troubleshooting.md)
-and [validation](docs/validation.md) for details and the scope of the evidence.
-The initial public release is a prerelease for wider testing, not a promise that
-every display setup or mod combination works.
-
-## Build from source
-
-Install Visual Studio 2022 or Build Tools with **Desktop development with C++**,
-the MSVC x86/x64 tools and a Windows SDK. CMake 3.24+ is required.
-
-```powershell
-cmake -S . -B build -G "Visual Studio 17 2022" -A Win32
-cmake --build build --config Release
-ctest --test-dir build -C Release --output-on-failure
-powershell -NoProfile -File scripts/package.ps1 -BuildDir build
-```
-
-CMake generates a Visual Studio solution under `build/` if you prefer the IDE.
-The package script creates a ZIP, SHA-256 checksum and build manifest under `dist/`.
-It packages only explicitly installed release files; tests, private game files,
-research data and build intermediates are excluded. See [development](docs/development.md).
+Bug reports and focused fixes are welcome. See [contributing](CONTRIBUTING.md)
+or [building from source](docs/development.md).
 
 ## Licence
 
-Bug reports and focused fixes are welcome; see [contributing](CONTRIBUTING.md).
-
-[MIT](LICENSE). An unofficial community project; no game executable or game assets
-are distributed. Neverwinter Nights and associated names belong to their respective owners.
+[MIT](LICENSE). An unofficial community project; no game executable or game
+assets are distributed. Neverwinter Nights and associated names belong to their
+respective owners.

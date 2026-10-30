@@ -1,46 +1,47 @@
 # Compatibility
 
-The supported files are `nwn2main.exe` from the two locally investigated GOG
-Neverwinter Nights 2 Complete 1.23 distributions. The bootstrap and runtime independently
-verify SHA-256; the DLL also checks expected bytes before writing patch sites.
+Patchwork supports **GOG Neverwinter Nights 2 Complete 1.23 and 1.23 v2**.
+It does not support Enhanced Edition, other store releases or modified game
+executables.
 
-| Label | SHA-256 |
+Patchwork checks your executable before applying fixes. Only the following
+`nwn2main.exe` files are supported; the version label alone is not enough.
+
+| Game build | SHA-256 |
 | --- | --- |
 | GOG 1.23 | `5bfcdac2cdcdbb460eb7995a7b0521e9a2398bee3918f9589c4e708f385d091e` |
 | GOG 1.23 v2 | `bd599aa8cb680e44516e18a8847f0edd201a331227af94baf20fc5f74ff605ae` |
 
-These labels identify the tested builds; a matching version string is insufficient.
-This does not claim vendor authenticity for every file in an installation.
-Other store releases, modified executables and Enhanced Edition are not supported.
-
-The [multiplayer login bypass](multiplayer.md) uses these same two hashes and is
-enabled in the supplied 0.3.0 INI. Bounded both-build login/general checks and v2
-local-server/password/LAN checks have evidence. Original actual server joining,
-isolated offline and wider network/mod combinations remain untested.
-
-For a check without starting the game, compare this result with the table:
+To check your file, run this in PowerShell from the game folder:
 
 ```powershell
 Get-FileHash .\nwn2main.exe -Algorithm SHA256
 ```
 
-Install beside `nwn2main.exe`; configuration is resolved relative to the DLL,
-independently of a shortcut's working directory. Paths must fit the inherited
-Windows 259-character limit. Only a process named `nwn2main.exe` is patched;
-other executables that load the DLL receive ordinary DirectInput forwarding.
+Use the x86 package even on 64-bit Windows. Gameplay checks were performed on
+Windows 11; other Windows versions have not been tested in-game.
 
-## Other runtime modifications
+## Other mods
 
-Combining runtime patchers has not been validated. The bootstrap refuses known
-conflicting files in the game root: `nwn2fixes.dll`, `dxwrapper.dll`,
-`ClientExtension.hdl`, `ClientExtension.dll`, `d3d9.dll`,
-`dsound.dll`, `ddraw.dll`, `winmm.dll` and `version.dll`.
-It never removes those files. Keep a backup and use a clean installation for testing.
-This list is a conflict check, not proof that no other injection exists.
-Game-content mods have not been systematically tested.
+Other runtime patchers and wrappers are not currently supported alongside
+Patchwork. It refuses to start when it finds these known conflicting files
+in the game folder:
 
-Do not overwrite an existing `dinput8.dll`: Patchwork uses that filename itself.
-Chaining another input loader is not implemented. No third-party loader is bundled.
-The system DirectInput DLL is resolved by its full system-directory path.
-Initialization failure shows a message and stops the newly starting game to avoid
-continuing with partially installed hooks. Patchwork does not attach to other processes.
+`nwn2fixes.dll`, `dxwrapper.dll`, `ClientExtension.hdl`,
+`ClientExtension.dll`, `d3d9.dll`, `dsound.dll`, `ddraw.dll`,
+`winmm.dll` or `version.dll`.
+
+Patchwork does not remove these files. Follow the other mod's uninstall
+instructions or use a separate clean installation.
+
+Do not overwrite another mod's `dinput8.dll`; Patchwork uses that filename too.
+Loading multiple mods through it is not supported. Other combinations, including
+game-content mods, have not been systematically tested.
+
+## Installation requirements
+
+Place `dinput8.dll` beside `nwn2main.exe`, with the `nwn2-patchwork` folder
+beside it. Avoid installation paths longer than 259 characters.
+
+If a compatibility or initialization check fails, Patchwork displays an error
+and stops that game launch. See [troubleshooting](troubleshooting.md).

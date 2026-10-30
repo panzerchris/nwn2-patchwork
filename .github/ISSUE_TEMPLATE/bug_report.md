@@ -1,18 +1,16 @@
 ---
 name: Bug report
-about: Report a reproducible problem with a Patchwork build
+about: Report a problem with Patchwork
 title: ''
 labels: bug
 assignees: ''
 ---
 
-<!-- The initial binary candidate is currently held for Defender review.
-Do not change security settings or restore quarantined files to reproduce a bug. -->
+**Patchwork version**
 
-**Patchwork version or source commit**
-
-**Game build and nwn2main.exe SHA-256**
+**Game build**
 GOG 1.23 / GOG 1.23 v2 / unsure:
+Executable SHA-256, if available:
 
 **What happened, and what did you expect?**
 
@@ -22,15 +20,15 @@ GOG 1.23 / GOG 1.23 v2 / unsure:
 3.
 
 **Where does it happen?**
-Main menu or loaded gameplay? Which move/resize/mode operation triggers it?
-Does the image recover after releasing the window? Does the first gameplay click respond?
+Main menu or during gameplay? For display issues, do the picture and controls
+recover after releasing the window? For multiplayer, which step fails?
 
 **Setup**
 - Windows version:
-- GPU and display resolution/scaling; multiple monitors if relevant:
-- EPOS Connect, overlays or other runtime mods:
-- Relevant Patchwork INI settings:
+- Relevant GPU/display details:
+- Other mods or overlays:
+- Changed Patchwork settings:
 
-**Optional evidence**
-Include only a relevant small startup log or screenshot after checking its contents.
-Please do not attach game executables, complete saves, private game INIs or installation archives.
+**Optional log or screenshot**
+Check its contents before sharing. Please do not attach game executables,
+saves, private game settings or installation archives.

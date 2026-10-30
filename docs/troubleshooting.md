@@ -1,40 +1,65 @@
 # Troubleshooting
 
-**The normal shortcut has no fixes:** check that `dinput8.dll` is beside the actual
-`nwn2main.exe` it launches, with the `nwn2-patchwork` subfolder beside it. Look for
-a new session under the log path below. Another loader or unsupported EXE may prevent startup.
+## Patchwork does not seem to load
 
-**Unsupported executable:** check the hash against compatibility.md. Restore the
-supported game through your installer/client if appropriate; do not rename a
-modified executable to bypass the check. The newly starting game is stopped.
+Check that `dinput8.dll` is beside the `nwn2main.exe` your shortcut starts,
+with the `nwn2-patchwork` folder beside it. A successful startup creates a log
+under `%LOCALAPPDATA%\NWN2 Patchwork\logs`.
 
-**Another patch/proxy is present:** Patchwork refuses known combinations. It does
-not uninstall anything. Use a separate clean installation or preserve and remove
-the other mod following that mod's own instructions.
+## Unsupported executable or conflicting mod
 
-**Fullscreen immediately minimizes:** EPOS Connect may be taking focus after the
-monitor changes resolution. Try the optional borderless setting in configuration.md.
-That workaround has been checked with EPOS running on both supported EXEs.
+Compare your executable hash with [compatibility](compatibility.md).
+Other runtime patchers and wrappers can also prevent startup. Use a supported
+installation and follow the other mod's removal instructions if needed.
 
-**Rendering pauses while dragging:** expected with native modal moving/resizing.
-Report a problem if rendering or input remains broken after releasing the window.
+## Fullscreen immediately minimizes
 
-**HUD stretches in a small window:** an original UI-scaling limitation below
-1024 wide or 768 high. This release does not redesign the game's HUD.
+EPOS Connect can take focus when the monitor changes resolution.
+Try [borderless fullscreen](configuration.md#borderless-fullscreen).
 
-**Configuration refusal:** keep switches at 0 or 1, check section/key spelling,
-and keep dependent settings enabled together. The startup message names the
-relevant dependency. RevertV2 cannot be disabled on v2 in this implementation.
+## Rendering pauses while dragging
 
-**Initialization refused with a numeric code:** 2/3 identify an unsupported image
-base/hash; 5/6/12/16/20/21/23 identify expected-code mismatch or hook preparation;
-7/8 identify missing/unwritable startup logging; 9/10/13 identify a failed patch
-write. 4/11/14/15/17/18/19/22 are configuration guards. Do not bypass the checks.
-The newly starting game is stopped if initialization fails.
+A pause while moving or resizing the window is expected. Report a bug if the
+picture or controls stay broken after you release it.
 
-**Reporting a bug:** include the release version, executable SHA-256, relevant
-INI settings, Windows/GPU/display setup and the exact operation that leaves the
-game broken. State whether it happens at the menu or during gameplay, and whether
-EPOS/overlays/other mods are running. Include the relevant small startup log from
-`%LOCALAPPDATA%\NWN2 Patchwork\logs` if useful; inspect files before sharing.
-Logs are local; Patchwork has no telemetry or automatic upload.
+## The HUD stretches in a small window
+
+This is an original game limitation below 1024 pixels wide or 768 pixels high.
+Use a larger window or raise the minimum size in the [configuration](configuration.md).
+
+## Multiplayer still has the long login wait
+
+Check that you installed Patchwork 0.3.0 and that your INI contains
+`[Multiplayer]` with `SkipLegacyLoginCheck=1`. An older INI keeps the original
+wait until you add the setting. The service-unavailable warning still requires OK.
+
+For local server connections, see the [multiplayer guide](multiplayer.md).
+
+## Configuration or initialization error
+
+The startup message identifies the problem. Check spelling, use 0 or 1 for
+switches, and keep required settings enabled together. `RevertV2` must remain
+enabled on GOG v2. See [configuration](configuration.md).
+
+If an initialization error persists, include its message and numeric code in a
+bug report. Patchwork stops the launch when initialization fails.
+
+## Antivirus detection
+
+Keep the file quarantined and report the Patchwork version and detection name.
+Do not disable protection or add an exclusion to run it.
+
+## Report a bug
+
+[Open an issue](https://github.com/panzerchris/nwn2-patchwork/issues/new/choose)
+with:
+
+- Your Patchwork version and GOG game build; include the executable SHA-256 if available.
+- What you did, what happened and what you expected.
+- Whether it happens in the menu or during gameplay.
+- Windows version, relevant display/GPU details, other mods and changed Patchwork settings.
+
+A screenshot or relevant small startup log can help. Logs are in
+`%LOCALAPPDATA%\NWN2 Patchwork\logs`; check their contents before sharing.
+Please do not attach game executables, saves or private game settings.
+Patchwork has no telemetry or automatic log upload.
